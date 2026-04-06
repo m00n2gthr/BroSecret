@@ -66,12 +66,43 @@ export default function Flashcard() {
       {/* CARDS */}
       <div className="cards">
         {cards.map((card) => (
-          <div key={card.id} className="card">
-            <h3>{card.question}</h3>
-            <p>{card.answer}</p>
-            <button onClick={() => deleteCard(card.id)}>Delete</button>
-          </div>
+          <FlipCard
+            key={card.id}
+            question={card.question}
+            answer={card.answer}
+            onDelete={() => deleteCard(card.id)}
+          />
         ))}
+      </div>
+    </div>
+  );
+}
+
+function FlipCard({ question, answer, onDelete }) {
+  const [flipped, setFlipped] = useState(false);
+
+  return (
+    <div className="flip-card" onClick={() => setFlipped(!flipped)}>
+      <div className={`flip-inner ${flipped ? "flipped" : ""}`}>
+        
+        {/* FRONT */}
+        <div className="flip-front">
+          <h3>{question}</h3>
+        </div>
+
+        {/* BACK */}
+        <div className="flip-back">
+          <p>{answer}</p>
+          <button
+            onClick={(e) => {
+              e.stopPropagation(); // prevent flip
+              onDelete();
+            }}
+          >
+            Delete
+          </button>
+        </div>
+
       </div>
     </div>
   );
