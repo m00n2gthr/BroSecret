@@ -30,7 +30,7 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: white) {
   :root {
     --text: #9ca3af;
     --text-h: #f3f4f6;
@@ -65,8 +65,12 @@ body {
   flex-direction: column;
   box-sizing: border-box;
 }
-
-h1,
+/* #root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+h1, */
 h2 {
   font-family: var(--heading);
   font-weight: 500;

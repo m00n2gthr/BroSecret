@@ -47,11 +47,17 @@ export default function Flashcard() {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Bro’s Secret</h1>
       <p>
         You’ve discovered {discovered.length} out of {cards.length} bro’s secret 💖
       </p>
+      <div className="progress-bar">
+        <div
+          className="progress-fill"
+          style={{ width: `${progress}%` }}
+        ></div>
+      </div>
       {progress === 100 && <p>🎉 Now you know your bro very well!</p>}
       {/* INPUT */}
       <div className="input-group">
@@ -91,11 +97,10 @@ function FlipCard({ id, question, answer, onDelete, discovered, setDiscovered })
 
   return (
     <div
-      className="flip-card"
+      className="flip-card card-appear"
       onClick={() => {
         setFlipped(!flipped);
 
-        // ⭐ THIS IS STEP 2
         if (!discovered.includes(id)) {
           setDiscovered([...discovered, id]);
         }
