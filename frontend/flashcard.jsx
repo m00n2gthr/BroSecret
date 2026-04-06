@@ -3,11 +3,13 @@ import "./flashcard.css";
 
 const API = "http://127.0.0.1:8000";
 
+
 export default function Flashcard() {
   const [cards, setCards] = useState([]);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-
+  const [discovered, setDiscovered] = useState([]);
+  const progress = (discovered.length / cards.length) * 100;
   // 📥 GET
   const fetchCards = async () => {
     const res = await fetch(API + "/flashcards");
@@ -46,19 +48,22 @@ export default function Flashcard() {
 
   return (
     <div>
-      <h1>Flashcards</h1>
-
+      <h1>Bro’s Secret</h1>
+      <p>
+        You’ve discovered {discovered.length} out of {cards.length} bro’s secret 💖
+      </p>
+      {progress === 100 && <p>🎉 Now you know your bro very well!</p>}
       {/* INPUT */}
       <div className="input-group">
         <input
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          placeholder="Question"
+          placeholder="Bro"
         />
         <input
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
-          placeholder="Answer"
+          placeholder="Bro’s secret"
         />
         <button onClick={addCard}>Add</button>
       </div>
@@ -68,8 +73,11 @@ export default function Flashcard() {
         {cards.map((card) => (
           <FlipCard
             key={card.id}
+            id={card.id}
             question={card.question}
             answer={card.answer}
+            discovered={discovered}
+            setDiscovered={setDiscovered}
             onDelete={() => deleteCard(card.id)}
           />
         ))}
@@ -78,11 +86,21 @@ export default function Flashcard() {
   );
 }
 
-function FlipCard({ question, answer, onDelete }) {
+function FlipCard({ id, question, answer, onDelete, discovered, setDiscovered }) {
   const [flipped, setFlipped] = useState(false);
 
   return (
-    <div className="flip-card" onClick={() => setFlipped(!flipped)}>
+    <div
+      className="flip-card"
+      onClick={() => {
+        setFlipped(!flipped);
+
+        // ⭐ THIS IS STEP 2
+        if (!discovered.includes(id)) {
+          setDiscovered([...discovered, id]);
+        }
+      }}
+    >
       <div className={`flip-inner ${flipped ? "flipped" : ""}`}>
         
         {/* FRONT */}
