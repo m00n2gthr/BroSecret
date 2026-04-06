@@ -2,9 +2,15 @@ from fastapi import FastAPI
 from sqlmodel import Session, select
 from database import engine, create_db_and_tables
 from models import Flashcard
-
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 @app.get("/")
 def read_root():
     return {
