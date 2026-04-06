@@ -1,16 +1,67 @@
-# React + Vite
+# Bro’s Secret 💖
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Project Overview
+Bro’s Secret is a single-page web application that allows users to store and explore fun facts (secrets) about their friends. Users can add, view, and delete secrets while tracking how many they have discovered.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🎯 Purpose
+The purpose of this application is to create a fun and interactive way for users to learn more about their friends. Instead of a traditional flashcard system, this app focuses on discovering personal and social information in an engaging way.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
+- Frontend: React (Vite)
+- Backend: FastAPI (Python)
+- Database: MySQL
+- Styling: CSS
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+- Add new secrets (Create)
+- View all secrets (Read)
+- Delete secrets (Delete)
+- Flip card animation to reveal secrets
+- Discovery tracking system (progress bar)
+- Responsive layout (mobile friendly)
+- Input validation for better data quality
+
+---
+
+## 🧠 Business Logic
+The application includes a discovery tracking system where each card is marked as “discovered” when clicked. A progress bar visually represents how many secrets the user has explored. This creates a meaningful user experience beyond basic CRUD operations.
+
+---
+
+## 📂 Folder Structure
+myFlashcard/
+├── backend/
+│ ├── main.py
+│ ├── models.py
+│ └── database.py
+│
+├── frontend/
+│ ├── flashcard.jsx
+│ ├── flashcard.css
+│
+├── src/
+│ ├── App.jsx
+│ ├── main.jsx
+│ └── index.css
+
+---
+
+
+---
+
+## ⚠️ Challenges Faced
+One challenge was connecting the frontend and backend correctly, especially handling API requests. Another challenge was managing state in React, such as tracking discovered cards and updating the UI dynamically. Styling and layout issues (such as alignment and responsiveness) also required debugging and adjustments.
+
+---
+
+## 🚀 Future Improvements
+- Add edit/update functionality
+- Store discovery progress in the database
+- Improve UI with animations and icons
+- Add categories or tags for secrets
