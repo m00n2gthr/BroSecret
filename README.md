@@ -34,27 +34,6 @@ The application includes a discovery tracking system where each card is marked a
 
 ---
 
-## 📂 Folder Structure
-myFlashcard/
-├── backend/
-│ ├── main.py
-│ ├── models.py
-│ └── database.py
-│
-├── frontend/
-│ ├── flashcard.jsx
-│ ├── flashcard.css
-│
-├── src/
-│ ├── App.jsx
-│ ├── main.jsx
-│ └── index.css
-
----
-
-
----
-
 ## ⚠️ Challenges Faced
 One challenge was connecting the frontend and backend correctly, especially handling API requests. Another challenge was managing state in React, such as tracking discovered cards and updating the UI dynamically. Styling and layout issues (such as alignment and responsiveness) also required debugging and adjustments.
 
