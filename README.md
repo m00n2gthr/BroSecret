@@ -72,7 +72,7 @@ This will recreate the database structure and data required for the application.
 ## 📁 Project Structure
 
 ```bash
-myFlashcard/
+BroSecret/
 ├── backend/        # FastAPI backend
 ├── frontend/       # Custom React components
 ├── src/            # Main React app (Vite)
