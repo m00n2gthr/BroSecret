@@ -29,6 +29,16 @@ The purpose of this application is to create a fun and interactive way for users
 
 ---
 
+## 💾 Database
+The database file is included in the `/database` folder as `flashcard_db.sql`.
+
+To use:
+1. Open MySQL Workbench
+2. Go to Server → Data Import
+3. Import the `.sql` file
+
+---
+
 ## 🧠 Business Logic
 The application includes a discovery tracking system where each card is marked as “discovered” when clicked. A progress bar visually represents how many secrets the user has explored. This creates a meaningful user experience beyond basic CRUD operations.
 
