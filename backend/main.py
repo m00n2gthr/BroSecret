@@ -3,6 +3,7 @@ from sqlmodel import Session, select
 from database import engine, create_db_and_tables
 from models import Flashcard
 from fastapi.middleware.cors import CORSMiddleware
+from sqlmodel import Session
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -48,3 +49,19 @@ def delete_flashcard(card_id: int):
         session.delete(card)
         session.commit()
         return {"message": "Deleted"}
+    
+@app.put("/flashcards/{id}")
+def update_flashcard(id: int, updated_card: Flashcard):
+    with Session(engine) as session:
+        card = session.get(Flashcard, id)
+        if not card:
+            return {"error": "Flashcard not found"}
+
+        card.question = updated_card.question
+        card.answer = updated_card.answer
+
+        session.add(card)
+        session.commit()
+        session.refresh(card)
+
+        return card

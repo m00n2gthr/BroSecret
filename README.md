@@ -1,56 +1,128 @@
 # Bro’s Secret 💖
 
 ## 📌 Project Overview
-Bro’s Secret is a single-page web application that allows users to store and explore fun facts (secrets) about their friends. Users can add, view, and delete secrets while tracking how many they have discovered.
+
+Bro’s Secret is a fun single-page web application that allows users to create and explore “secrets” about their friends. Each friend is represented as a flashcard that can be flipped to reveal hidden information.
+
+The app focuses on interaction, discovery, and a playful user experience rather than testing or scoring.
 
 ---
 
-## 🎯 Purpose
-The purpose of this application is to create a fun and interactive way for users to learn more about their friends. Instead of a traditional flashcard system, this app focuses on discovering personal and social information in an engaging way.
+## 🎯 Features
+
+* Create new flashcards (Add friend + secret)
+* View all flashcards on one page
+* Flip cards to reveal secrets
+* Track discovery progress (friendship progress bar 💕)
+* Edit existing flashcards
+* Delete flashcards
+* Smooth flip animation and responsive layout
 
 ---
 
-## 🛠️ Tech Stack
-- Frontend: React (Vite)
-- Backend: FastAPI (Python)
-- Database: MySQL
-- Styling: CSS
+## 🧱 Tech Stack
+
+### Frontend
+
+* React (Vite)
+* CSS (custom styling + animations)
+
+### Backend
+
+* FastAPI (Python)
+* SQLModel (ORM)
+
+### Database
+
+* MySQL
 
 ---
 
-## ✨ Features
-- Add new secrets (Create)
-- View all secrets (Read)
-- Delete secrets (Delete)
-- Flip card animation to reveal secrets
-- Discovery tracking system (progress bar)
-- Responsive layout (mobile friendly)
-- Input validation for better data quality
+## 🔄 CRUD Functionality
+
+The application supports full CRUD operations:
+
+* **Create** → Add new flashcards
+* **Read** → Display all flashcards
+* **Update** → Edit existing flashcards
+* **Delete** → Remove flashcards
 
 ---
 
 ## 💾 Database
-The database file is included in the `/database` folder as `flashcard_db.sql`.
 
-To use:
+The database is included in this project inside the `/database` folder.
+
+```bash
+/database/flashcard_db.sql
+```
+
+### How to use:
+
 1. Open MySQL Workbench
-2. Go to Server → Data Import
-3. Import the `.sql` file
+2. Go to **Server → Data Import**
+3. Select **Import from Self-Contained File**
+4. Choose `flashcard_db.sql`
+5. Start Import
+
+This will recreate the database structure and data required for the application.
 
 ---
 
-## 🧠 Business Logic
-The application includes a discovery tracking system where each card is marked as “discovered” when clicked. A progress bar visually represents how many secrets the user has explored. This creates a meaningful user experience beyond basic CRUD operations.
+## 📁 Project Structure
+
+```bash
+myFlashcard/
+├── backend/        # FastAPI backend
+├── frontend/       # Custom React components
+├── src/            # Main React app (Vite)
+├── database/       # Database export (.sql)
+├── package.json
+├── README.md
+```
 
 ---
 
-## ⚠️ Challenges Faced
-One challenge was connecting the frontend and backend correctly, especially handling API requests. Another challenge was managing state in React, such as tracking discovered cards and updating the UI dynamically. Styling and layout issues (such as alignment and responsiveness) also required debugging and adjustments.
+## 🚀 How to Run
+
+### 1. Backend
+
+```bash
+cd backend
+uvicorn main:app --reload
+```
 
 ---
 
-## 🚀 Future Improvements
-- Add edit/update functionality
-- Store discovery progress in the database
-- Improve UI with animations and icons
-- Add categories or tags for secrets
+### 2. Frontend
+
+```bash
+npm install
+npm run dev
+```
+
+Open:
+👉 http://localhost:5173
+
+---
+
+## ✨ Design & UX
+
+* Clean pink theme for a friendly vibe
+* Flip card animation for interaction
+* Progress bar for engagement
+* Responsive grid layout (works on mobile)
+
+---
+
+## ⚠️ Notes
+
+* Make sure MySQL is running before starting backend
+* Backend runs on `http://127.0.0.1:8000`
+* Frontend connects via REST API
+
+---
+
+## 👨‍💻 Author
+
+Created as part of a Internet Programming assignment.

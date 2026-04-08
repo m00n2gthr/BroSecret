@@ -3,13 +3,19 @@ import "./flashcard.css";
 
 const API = "http://127.0.0.1:8000";
 
-
 export default function Flashcard() {
   const [cards, setCards] = useState([]);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [discovered, setDiscovered] = useState([]);
+
+  // 🔥 NEW (edit state)
+  const [editingId, setEditingId] = useState(null);
+  const [editQuestion, setEditQuestion] = useState("");
+  const [editAnswer, setEditAnswer] = useState("");
+
   const progress = (discovered.length / cards.length) * 100;
+
   // 📥 GET
   const fetchCards = async () => {
     const res = await fetch(API + "/flashcards");
@@ -46,19 +52,40 @@ export default function Flashcard() {
     fetchCards();
   };
 
+  // ✏️ UPDATE (NEW)
+  const updateCard = async (id) => {
+    await fetch(API + "/flashcards/" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        question: editQuestion,
+        answer: editAnswer,
+      }),
+    });
+
+    setEditingId(null);
+    fetchCards();
+  };
+
   return (
     <div className="container">
       <h1>Bro’s Secret</h1>
+
       <p>
         You’ve discovered {discovered.length} out of {cards.length} bro’s secret 💖
       </p>
+
       <div className="progress-bar">
         <div
           className="progress-fill"
           style={{ width: `${progress}%` }}
         ></div>
       </div>
+
       {progress === 100 && <p>🎉 Now you know your bro very well!</p>}
+
       {/* INPUT */}
       <div className="input-group">
         <input
@@ -85,6 +112,15 @@ export default function Flashcard() {
             discovered={discovered}
             setDiscovered={setDiscovered}
             onDelete={() => deleteCard(card.id)}
+
+            // 🔥 NEW props
+            editingId={editingId}
+            setEditingId={setEditingId}
+            editQuestion={editQuestion}
+            setEditQuestion={setEditQuestion}
+            editAnswer={editAnswer}
+            setEditAnswer={setEditAnswer}
+            onUpdate={updateCard}
           />
         ))}
       </div>
@@ -92,7 +128,23 @@ export default function Flashcard() {
   );
 }
 
-function FlipCard({ id, question, answer, onDelete, discovered, setDiscovered }) {
+function FlipCard({
+  id,
+  question,
+  answer,
+  onDelete,
+  discovered,
+  setDiscovered,
+
+  // 🔥 NEW props
+  editingId,
+  setEditingId,
+  editQuestion,
+  setEditQuestion,
+  editAnswer,
+  setEditAnswer,
+  onUpdate
+}) {
   const [flipped, setFlipped] = useState(false);
 
   return (
@@ -107,7 +159,7 @@ function FlipCard({ id, question, answer, onDelete, discovered, setDiscovered })
       }}
     >
       <div className={`flip-inner ${flipped ? "flipped" : ""}`}>
-        
+
         {/* FRONT */}
         <div className="flip-front">
           <h3>{question}</h3>
@@ -115,15 +167,53 @@ function FlipCard({ id, question, answer, onDelete, discovered, setDiscovered })
 
         {/* BACK */}
         <div className="flip-back">
-          <p>{answer}</p>
-          <button
-            onClick={(e) => {
-              e.stopPropagation(); // prevent flip
-              onDelete();
-            }}
-          >
-            Delete
-          </button>
+          {editingId === id ? (
+            <>
+              <input
+                value={editQuestion}
+                onClick={(e) => e.stopPropagation()}
+                onChange={(e) => setEditQuestion(e.target.value)}
+              />
+
+              <input
+                value={editAnswer}
+                onClick={(e) => e.stopPropagation()}
+                onChange={(e) => setEditAnswer(e.target.value)}
+              />
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onUpdate(id);
+                }}
+              >
+                Save
+              </button>
+            </>
+          ) : (
+            <>
+              <p>{answer}</p>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setEditingId(id);
+                  setEditQuestion(question);
+                  setEditAnswer(answer);
+                }}
+              >
+                Edit
+              </button>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDelete();
+                }}
+              >
+                Delete
+              </button>
+            </>
+          )}
         </div>
 
       </div>
