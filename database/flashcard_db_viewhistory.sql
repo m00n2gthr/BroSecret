@@ -16,28 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `flashcard`
+-- Table structure for table `viewhistory`
 --
 
-DROP TABLE IF EXISTS `flashcard`;
+DROP TABLE IF EXISTS `viewhistory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `flashcard` (
+CREATE TABLE `viewhistory` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `question` varchar(255) NOT NULL,
-  `answer` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `user_id` int NOT NULL,
+  `flashcard_id` int NOT NULL,
+  `viewed_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `flashcard_id` (`flashcard_id`),
+  CONSTRAINT `viewhistory_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `viewhistory_ibfk_2` FOREIGN KEY (`flashcard_id`) REFERENCES `flashcard` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `flashcard`
+-- Dumping data for table `viewhistory`
 --
 
-LOCK TABLES `flashcard` WRITE;
-/*!40000 ALTER TABLE `flashcard` DISABLE KEYS */;
-INSERT INTO `flashcard` VALUES (16,'Josh','has 2 side chicks'),(17,'Kevin','loves Ben Tennyson'),(18,'Peter','is Spiderman'),(19,'Joseph','has Hermit Purple');
-/*!40000 ALTER TABLE `flashcard` ENABLE KEYS */;
+LOCK TABLES `viewhistory` WRITE;
+/*!40000 ALTER TABLE `viewhistory` DISABLE KEYS */;
+INSERT INTO `viewhistory` VALUES (1,3,16,'2026-05-21 11:41:29'),(2,3,17,'2026-05-21 11:41:29'),(3,3,18,'2026-05-21 11:41:30'),(4,3,19,'2026-05-21 11:41:30'),(5,3,24,'2026-05-21 11:41:31');
+/*!40000 ALTER TABLE `viewhistory` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-08 10:05:44
+-- Dump completed on 2026-05-24 17:53:44
